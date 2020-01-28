@@ -22,4 +22,11 @@
         android:name="com.example.appoverseer.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_other"
+        android:name="com.example.appoverseer.ui.other.OtherFragment"
+        android:label="@string/title_other"
+        tools:layout="@layout/fragment_other" />
+
 </navigation>
