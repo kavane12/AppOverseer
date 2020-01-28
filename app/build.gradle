@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resConfigs "en" // And any other languages you support (firebaseui)
     }
     buildTypes {
         release {
@@ -48,6 +49,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.3.1'
+
+    // FirebaseUI
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
