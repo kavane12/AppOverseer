@@ -1,7 +1,7 @@
-package com.example.appoverseer
+package com.example.planmyworkout
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import android.app.Activity
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 const val RC_SIGN_IN = 7
-const val USER = "com.example.appoverseer.CURRENT_USER"
+const val USER = "com.example.planmyworkout.CURRENT_USER"
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,14 +20,14 @@ class MainActivity : AppCompatActivity() {
 
         val user = FirebaseAuth.getInstance().currentUser
 
-        // If already logged in, go to home page, else prompt login
+        // If user is already logged in, go to home page, else prompt login
         if (user != null) {
             switchToHomePage(user)
         } else {
             // Choose authentication providers
             val providers = arrayListOf(
-                AuthUI.IdpConfig.EmailBuilder().build(),
-                AuthUI.IdpConfig.AnonymousBuilder().build())
+                AuthUI.IdpConfig.EmailBuilder().build()
+            )
 
             // Create and launch sign-in intent
             startActivityForResult(
@@ -35,7 +35,9 @@ class MainActivity : AppCompatActivity() {
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
                     .build(),
-                RC_SIGN_IN)
+                RC_SIGN_IN
+            )
+
             setContentView(R.layout.activity_main)
         }
     }
@@ -50,7 +52,6 @@ class MainActivity : AppCompatActivity() {
                 // Successfully signed in, go to home page
                 val user = FirebaseAuth.getInstance().currentUser
                 switchToHomePage(user)
-
             } else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
@@ -61,20 +62,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchToHomePage(user: FirebaseUser?) {
         // Switch to home page and end current activity
-
         val intent = Intent(this, NavActivity::class.java)
 
         // Passes user variable to next activity
         intent.putExtra(USER, user)
 
-        // Prevents animations switch to
+        // Prevents animation when switching to new event
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
 
         // Stop current activity
         finish()
-        overridePendingTransition(0,0); //0 for no animation on finish()
+        overridePendingTransition(0, 0); //0 for no animation on finish()
 
         startActivity(intent)
     }
-
 }

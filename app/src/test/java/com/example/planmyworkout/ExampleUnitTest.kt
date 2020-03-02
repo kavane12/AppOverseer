@@ -1,4 +1,4 @@
-package com.example.appoverseer
+package com.example.planmyworkout
 
 import org.junit.Test
 

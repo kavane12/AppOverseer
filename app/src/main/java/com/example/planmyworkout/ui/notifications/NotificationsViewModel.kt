@@ -1,4 +1,4 @@
-package com.example.appoverseer.ui.notifications
+package com.example.planmyworkout.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
