@@ -8,13 +8,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
+
 class NavActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
+        // Set up bottom navigation bar
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
         // Passing each menu ID as a set of Ids because each
@@ -22,7 +24,7 @@ class NavActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_home,
             R.id.navigation_dashboard,
-            R.id.navigation_notifications
+            R.id.navigation_others
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
