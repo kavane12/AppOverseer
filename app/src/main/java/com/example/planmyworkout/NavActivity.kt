@@ -1,15 +1,24 @@
 package com.example.planmyworkout
 
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.androdocs.httprequest.HttpRequest
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class NavActivity : AppCompatActivity() {
+
+    // todo Latitude and Longitude of Irvine for testing
+    val LAT = 33.685909
+    val LONG = -117.824722
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +38,32 @@ class NavActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Get the weather
+        Weather().execute()
+    }
+
+    internal inner class Weather :AsyncTask<String?, Void?, String>() {
+
+        val OPENWEATHER_KEY: String = BuildConfig.OPENWEATHER_KEY
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            // Loading progress bar?
+        }
+
+        override fun doInBackground(vararg params: String?): String {
+            return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=$LAT&long=$LONG&units=metric&appid=$OPENWEATHER_KEY")
+        }
+
+        override fun onPostExecute(result: String) {
+            try {
+                val jsonObj = JSONObject(result)
+
+                Log.i("test", "Got ze json")
+            } catch (e: JSONException) {
+                // todo Do something
+            }
+        }
     }
 }
