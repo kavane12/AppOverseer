@@ -20,11 +20,11 @@ class OthersFragment : Fragment() {
 
     private lateinit var othersViewModel: OthersViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    // Declarations
+    private lateinit var weatherInfoTextView: TextView
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         othersViewModel = ViewModelProviders.of(this).get(OthersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_others, container, false)
 
@@ -33,9 +33,12 @@ class OthersFragment : Fragment() {
             textView.text = FirebaseAuth.getInstance().currentUser?.email
         })
 
+        // Assign declarations to objects
+        weatherInfoTextView = root.findViewById(R.id.weather_info)
+
         // OTHERS FRAGMENT - Sign out button
-        val signout_button: Button = root.findViewById(R.id.signout_button)
-        signout_button?.setOnClickListener {
+        val signoutButton: Button = root.findViewById(R.id.signout_button)
+        signoutButton?.setOnClickListener {
             activity?.let { it1 ->
                 AuthUI.getInstance().signOut(it1)
                     .addOnCompleteListener {
@@ -48,4 +51,10 @@ class OthersFragment : Fragment() {
 
         return root
     }
+
+    fun setWeatherInfoText(text: String?) {
+        weatherInfoTextView.setText(text)
+    }
+
+
 }
