@@ -12,4 +12,8 @@ class Workout : Activity() {
         Log.i("this ran", "switched to workout!")
     }
 
+    private fun recommendWorkout(muscleGroups: List<String>, intensity : Int = 0, duration : Int = 0) {
+
+    }
+
 }

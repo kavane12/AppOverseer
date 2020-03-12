@@ -82,7 +82,6 @@ class PopActivity : Activity() {
         hasEquipmentSwitch?.setOnCheckedChangeListener( object: CompoundButton.OnCheckedChangeListener {
 
             override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-//                newValue = isChecked
             }
         })
 
