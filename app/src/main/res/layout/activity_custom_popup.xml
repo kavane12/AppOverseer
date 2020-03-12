@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.PopActivity">
+
+    <TextView
+        android:id="@+id/custom_popup_title"
+        android:layout_width="418dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="48dp"
+        android:text="Customize your workout"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/custom_popup_duration_text"
+        android:layout_width="406dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:text="Duration: ~60 minutes"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_popup_title" />
+
+    <SeekBar
+        android:id="@+id/custom_popup_duration_seekbar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="298dp"
+        android:layout_height="39dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_popup_duration_text" />
+
+    <TextView
+        android:id="@+id/custom_popup_intensity_text"
+        android:layout_width="406dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="132dp"
+        android:text="Intensity: 5"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_popup_title" />
+
+    <SeekBar
+        android:id="@+id/custom_popup_intensity_seekbar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="298dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="92dp"
+        android:max="9"
+        android:progress="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_popup_duration_text" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
