@@ -35,8 +35,11 @@ class HomeFragment : Fragment() {
 
         customButton?.setOnClickListener {
             activity?.let { it1 ->
-                val intent = Intent(it1, Pop::class.java)
-                startActivity( intent )
+
+                    val intent = Intent(it1, PopActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
+                    startActivity(intent)
+
             }
         }
 
