@@ -55,7 +55,7 @@ class NavActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: String?): String {
             return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=$LAT&lon=$LONG&units=metric&appid=$OPENWEATHER_KEY")
-        }
+    }
 
         override fun onPostExecute(result: String) {
             try {
