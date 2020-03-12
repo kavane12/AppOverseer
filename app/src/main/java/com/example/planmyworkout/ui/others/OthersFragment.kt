@@ -36,8 +36,8 @@ class OthersFragment : Fragment() {
                 AuthUI.getInstance().signOut(it1)
                     .addOnCompleteListener {
                         val intent = Intent(it1, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
                         startActivity(intent)
+                        it1.finish()
                     }
             }
         }
