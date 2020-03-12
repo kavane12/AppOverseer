@@ -1,13 +1,16 @@
 package com.example.planmyworkout.ui.home
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.widget.SeekBar
+import android.util.Log
+import android.view.View
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
-import android.widget.Toast
 import com.example.planmyworkout.R
+import com.example.planmyworkout.ui.Workout
 
 
 class PopActivity : Activity() {
@@ -72,6 +75,58 @@ class PopActivity : Activity() {
                 // Required by object
             }
         })
+
+        // "At Gym?" Switch
+        val hasEquipmentSwitch = findViewById<Switch>(R.id.custom_popup_equipment_switch)
+
+        hasEquipmentSwitch?.setOnCheckedChangeListener( object: CompoundButton.OnCheckedChangeListener {
+
+            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+//                newValue = isChecked
+            }
+        })
+
+        // Muscle Group Spinner (dropdown)
+        val muscleGroupSpinner = findViewById<Spinner>(R.id.custom_popup_spinner)
+
+        // List of items for the spinner.
+        val items: MutableList<String> = mutableListOf<String>()
+        items.add ("")
+        items.add("Arm")
+        items.add("Chest")
+        items.add("Leg")
+
+        // Create an adapter to describe how the items are displayed
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
+        muscleGroupSpinner.adapter = adapter
+
+        // For access of "this" inside callback
+        val that = this
+
+        muscleGroupSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
+            var check = false
+
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
+                if (check) {
+                    // Remove selection from dropdown
+                    items.removeAt(position)
+
+                    val newAdapter = ArrayAdapter(that, android.R.layout.simple_spinner_dropdown_item, items)
+                    muscleGroupSpinner.adapter = newAdapter
+
+                    check = false
+                } else {
+                    check = true
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+            }
+        })
+    }
+
+    private fun switchToWorkoutActivity() {
+        val intent = Intent(this, Workout::class.java)
     }
 
 
