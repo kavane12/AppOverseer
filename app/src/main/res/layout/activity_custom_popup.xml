@@ -11,13 +11,13 @@
         android:id="@+id/custom_popup_title"
         android:layout_width="418dp"
         android:layout_height="74dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="Customize your workout"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,12 +25,12 @@
         android:id="@+id/custom_popup_duration_text"
         android:layout_width="406dp"
         android:layout_height="25dp"
-        android:layout_marginTop="5dp"
         android:text="Duration: ~60 minutes"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_popup_title" />
 
@@ -50,13 +50,13 @@
         android:id="@+id/custom_popup_intensity_text"
         android:layout_width="406dp"
         android:layout_height="25dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:text="Intensity: 5"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_popup_duration_seekbar" />
 
@@ -76,24 +76,25 @@
         android:id="@+id/custom_start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="28dp"
         android:text="Start!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
         android:id="@+id/custom_popup_equipment_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:checked="true"
         android:showText="false"
         android:text="At Gym?   "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_popup_intensity_seekbar" />
 
@@ -101,7 +102,7 @@
         android:id="@+id/custom_popup_muscle_text"
         android:layout_width="82dp"
         android:layout_height="48dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:text="Muscle Groups"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18dp"
@@ -114,18 +115,19 @@
         android:id="@+id/custom_popup_spinner"
         android:layout_width="172dp"
         android:layout_height="48dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_popup_equipment_switch" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/custom_popup_chips"
-        android:layout_width="283dp"
-        android:layout_height="102dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="305dp"
+        android:layout_height="298dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_popup_spinner" />
 

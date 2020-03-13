@@ -47,6 +47,7 @@ class NavActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // Goals Popup
         val docRef = db.collection("Users").document(user!!.email.toString())
         docRef.get().addOnSuccessListener { document ->
             if (document != null && document.data?.get("desiredMuscles") != null) {

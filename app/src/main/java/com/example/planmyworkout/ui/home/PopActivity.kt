@@ -11,6 +11,8 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SeekBar.OnSeekBarChangeListener
 import com.example.planmyworkout.R
 import com.example.planmyworkout.ui.Workout
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -18,6 +20,9 @@ import com.google.firebase.ktx.Firebase
 class PopActivity : Activity() {
 
     val db = Firebase.firestore
+
+    // Run once for Spinner
+    var check = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +94,9 @@ class PopActivity : Activity() {
             }
         })
 
+        // List of items that have been selected by user
+        var selectedMuscles = mutableSetOf<String>()
+
         // Muscle Group Spinner (dropdown)
         val muscleGroupSpinner = findViewById<Spinner>(R.id.custom_popup_spinner)
 
@@ -114,14 +122,16 @@ class PopActivity : Activity() {
         val that = this
 
         muscleGroupSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
-            var check = false
 
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, id: Long) {
                 if (check) {
-                    // Remove selection from dropdown
-                    items.removeAt(position)
+                    // Remove selection from dropdown, add to selected
+                    val removed = items.removeAt(position)
+                    selectedMuscles.add(removed)
+                    addChip(removed, selectedMuscles, items, muscleGroupSpinner)
 
-                    val newAdapter = ArrayAdapter(that, android.R.layout.simple_spinner_dropdown_item, items)
+                    val newAdapter =
+                        ArrayAdapter(that, android.R.layout.simple_spinner_dropdown_item, items)
                     muscleGroupSpinner.adapter = newAdapter
 
                     check = false
@@ -133,6 +143,36 @@ class PopActivity : Activity() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
             }
         })
+    }
+
+    private fun addChip(tag: String, musclesSet: MutableSet<String>, dropdownItems : MutableList<String>, popupMuscleSpinner : Spinner) {
+        val chipGroup: ChipGroup = findViewById(R.id.custom_popup_chips)
+        // Create chip
+        val chip = Chip(this)
+
+        chip.text = tag
+        chip.setCloseIconResource(android.R.drawable.ic_menu_close_clear_cancel)
+        chip.isCloseIconVisible = true
+
+        //Added click listener for close icon to remove chip from ChipGroup
+        chip.setOnCloseIconClickListener {
+            musclesSet.remove(tag)
+            chipGroup.removeView(chip)
+
+            // Readd to dropdown menu
+            dropdownItems.removeAt(0)
+            dropdownItems.add(tag)
+            dropdownItems.sort()
+            dropdownItems.add(0, "All")
+
+            val newAdapter =
+                ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dropdownItems)
+            popupMuscleSpinner.adapter = newAdapter
+
+            check = false
+        }
+
+        chipGroup.addView(chip)
     }
 
     private fun switchToWorkoutActivity() {
