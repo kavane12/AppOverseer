@@ -90,7 +90,7 @@ class PopActivity : Activity() {
 
         // List of items for the spinner.
         val items: MutableList<String> = mutableListOf<String>()
-        items.add ("")
+        items.add ("Any")
         items.add("Arm")
         items.add("Chest")
         items.add("Leg")
