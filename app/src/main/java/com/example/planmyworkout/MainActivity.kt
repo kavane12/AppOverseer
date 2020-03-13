@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                 )
 
                 // Add user to Firebase
-                db.collection("Users").document(user?.email.toString()).set(info)
+                db.collection("Users").document(info["email"].toString()).set(info)
 
                 switchToHomePage(user)
             } else {
