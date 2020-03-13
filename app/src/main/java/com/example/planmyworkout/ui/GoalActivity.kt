@@ -6,15 +6,13 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
 import com.example.planmyworkout.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -40,9 +38,9 @@ class GoalActivity : Activity() {
 
         window.setLayout((width * 0.8).toInt(), (height * 0.7).toInt())
 
+        // Goal title
         val goalTitle = findViewById<TextView>(R.id.goal_title)
         goalTitle.setText("Welcome, ${user!!.displayName}")
-
 
         // List of items that have been selected by user
         var selectedMuscles = mutableSetOf<String>()
@@ -94,8 +92,14 @@ class GoalActivity : Activity() {
             }
         })
 
-        // Goals ChipGroup
-        val goalsChipGroup = findViewById<ChipGroup>(R.id.goal_chipgroup)
+        // Goals Confirm button
+        val goalConfirmButton = findViewById<Button>(R.id.goal_confirm_button)
+
+        goalConfirmButton.setOnClickListener {
+            val data = hashMapOf("desiredMuscles" to selectedMuscles.toList())
+            db.collection("Users").document(user.email.toString()).set(data, SetOptions.merge())
+            finish()
+        }
 
 
     }
