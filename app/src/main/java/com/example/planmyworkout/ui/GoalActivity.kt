@@ -43,9 +43,20 @@ class GoalActivity : Activity() {
         // List of items for the spinner.
         val items: MutableList<String> = mutableListOf<String>()
         items.add ("All")
-        items.add("Arm")
-        items.add("Chest")
-        items.add("Leg")
+
+        val muscleDocRef = db.collection("Muscle Groups").document("muscles")
+        muscleDocRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                val muscleList : List<String> = document.data?.get("muscleList") as List<String>
+                for (muscle in muscleList.sorted()) {
+                    items.add(muscle)
+                }
+            }
+        }
+
+
+
+
 
         // Create an adapter to describe how the items are displayed
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
