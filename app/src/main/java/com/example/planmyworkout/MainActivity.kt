@@ -93,7 +93,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             // Choose authentication providers
             val providers = arrayListOf(
-                AuthUI.IdpConfig.EmailBuilder().build()
+                AuthUI.IdpConfig.EmailBuilder().build(),
+                AuthUI.IdpConfig.GoogleBuilder().build()
             )
 
             // Create and launch sign-in intent
