@@ -123,6 +123,16 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in, add user and then go to home page
                 val user = FirebaseAuth.getInstance().currentUser
+
+                val info = hashMapOf(
+                    "userId" to user?.uid,
+                    "email" to user?.email,
+                    "name" to user?.displayName
+                )
+
+                // Add user to Firebase
+                db.collection("Users").document(user?.email.toString()).set(info)
+
                 switchToHomePage(user)
             } else {
                 // Sign in failed. If response is null the user canceled the
