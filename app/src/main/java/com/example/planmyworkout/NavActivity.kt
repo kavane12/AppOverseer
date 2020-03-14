@@ -1,15 +1,25 @@
 package com.example.planmyworkout
 
+import android.os.AsyncTask
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.androdocs.httprequest.HttpRequest
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class NavActivity : AppCompatActivity() {
+
+    // todo Latitude and Longitude of Irvine for testing
+    val LAT = 33
+    val LONG = -118
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +39,38 @@ class NavActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Get the weather
+        Weather().execute()
+    }
+
+    internal inner class Weather :AsyncTask<String?, Void?, String>() {
+
+        val OPENWEATHER_KEY: String = BuildConfig.OPENWEATHER_KEY
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            // Loading progress bar?
+        }
+
+        override fun doInBackground(vararg params: String?): String {
+            return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=$LAT&lon=$LONG&units=metric&appid=$OPENWEATHER_KEY")
+    }
+
+        override fun onPostExecute(result: String) {
+            try {
+                Log.i("Entire Weather JSON", JSONObject(result).toString())
+
+                val jsonObj = JSONObject(result)
+                val main = jsonObj.getJSONObject("main")
+                val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
+
+                val weatherInfoText = ".\nWEATHER\nCurrently: ${weather.getString("main")}\nTemp max: ${main.getString("temp_max")}\nTemp min: ${main.getString("temp_min")}\nFeelsLike: ${main.getString("feels_like")}"
+                Log.i("WEATHER", weatherInfoText)
+
+            } catch (e: JSONException) {
+                Log.w("API Fetch", "Failed to fetch valid weather data")
+            }
+        }
     }
 }

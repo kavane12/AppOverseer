@@ -10,10 +10,18 @@
       "client_info": {
         "mobilesdk_app_id": "1:360465861745:android:d5e38cdcaee08eaebbdfd0",
         "android_client_info": {
-          "package_name": "com.example.planmyworkout"
+          "package_name": "com.company.planmyworkout"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "360465861745-l8ovt9b044a7kj45u3gkpc914kp7isuh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.planmyworkout",
+            "certificate_hash": "afdad6ae770e5a330f077f2455a14f51122603a6"
+          }
+        },
         {
           "client_id": "360465861745-dsro6oatdhl7b8ep0ruqd7ag3i300089.apps.googleusercontent.com",
           "client_type": 3

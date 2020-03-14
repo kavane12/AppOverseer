@@ -3,6 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
+// Load API keys from file
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -16,6 +22,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en" // And any other languages you support (firebaseui)
+
+        // Load API keys
+        buildConfigField("String", "OPENWEATHER_KEY", apikeyProperties["OPENWEATHER_KEY"])
     }
 
     buildTypes {
@@ -61,6 +70,13 @@ dependencies {
 
     // Firebase UI
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+
+    // Androdocs' Simple HTTP Request
+    implementation 'com.github.androdocs:Simple-HTTP-Request:v1.0'
+
+    // Google Fitness API
+    implementation 'com.google.android.gms:play-services-fitness:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

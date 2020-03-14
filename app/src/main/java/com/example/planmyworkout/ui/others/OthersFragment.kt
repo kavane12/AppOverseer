@@ -20,11 +20,7 @@ class OthersFragment : Fragment() {
 
     private lateinit var othersViewModel: OthersViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         othersViewModel = ViewModelProviders.of(this).get(OthersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_others, container, false)
 
@@ -34,8 +30,8 @@ class OthersFragment : Fragment() {
         })
 
         // OTHERS FRAGMENT - Sign out button
-        val signout_button: Button = root.findViewById(R.id.signout_button)
-        signout_button?.setOnClickListener {
+        val signoutButton: Button = root.findViewById(R.id.signout_button)
+        signoutButton?.setOnClickListener {
             activity?.let { it1 ->
                 AuthUI.getInstance().signOut(it1)
                     .addOnCompleteListener {
