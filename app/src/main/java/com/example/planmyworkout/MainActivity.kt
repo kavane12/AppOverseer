@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchToHomePage(user: FirebaseUser?) {
         // Switch to home page and end current activity
-        val intent = Intent(this, NavActivity::class.java)
+        val intent = Intent(this, PlaylistActivity::class.java)
 
         // Passes user variable to next activity
         intent.putExtra(USER, user)

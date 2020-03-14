@@ -5,4 +5,6 @@
     <string name="title_others">Others</string>
 
     <string name="signout_button">Sign Out</string>
+    <string name="play_button">Start this workout</string>
+    <string name="skip_button">Next exercise</string>
 </resources>
