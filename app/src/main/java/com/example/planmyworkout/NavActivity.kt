@@ -1,21 +1,28 @@
 package com.example.planmyworkout
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.androdocs.httprequest.HttpRequest
+import com.example.planmyworkout.ui.GoalActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import org.json.JSONException
 import org.json.JSONObject
 
 
 class NavActivity : AppCompatActivity() {
+
+    val user = FirebaseAuth.getInstance().currentUser
+    val db = Firebase.firestore
 
     // todo Latitude and Longitude of Irvine for testing
     val LAT = 33
@@ -39,6 +46,18 @@ class NavActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Goals Popup
+        val docRef = db.collection("Users").document(user!!.email.toString())
+        docRef.get().addOnSuccessListener { document ->
+            if (document != null && document.data?.get("desiredMuscles") != null) {
+                // User already has inputted goals
+            } else {
+                // User hasn't inputted goals
+                val intent = Intent(this, GoalActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         // Get the weather
         Weather().execute()

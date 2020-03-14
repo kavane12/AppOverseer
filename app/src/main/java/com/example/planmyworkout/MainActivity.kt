@@ -13,6 +13,8 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 const val RC_SIGN_IN = 7
@@ -25,6 +27,8 @@ val permissions = arrayOf(
 )
 
 class MainActivity : AppCompatActivity() {
+
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
+                    .setIsSmartLockEnabled(false)
                     .build(),
                 RC_SIGN_IN
             )
@@ -117,8 +122,18 @@ class MainActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in, go to home page
+                // Successfully signed in, add user and then go to home page
                 val user = FirebaseAuth.getInstance().currentUser
+
+                val info = hashMapOf(
+                    "userId" to user?.uid,
+                    "email" to user?.email,
+                    "name" to user?.displayName
+                )
+
+                // Add user to Firebase
+                db.collection("Users").document(info["email"].toString()).set(info)
+
                 switchToHomePage(user)
             } else {
                 // Sign in failed. If response is null the user canceled the
@@ -139,12 +154,11 @@ class MainActivity : AppCompatActivity() {
 
         // Prevents animation when switching to new event
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+
+        overridePendingTransition(0, 0); //0 for no animation on finish()
+        startActivity(intent)
 
         // Stop current activity
-        finish()
-        overridePendingTransition(0, 0); //0 for no animation on finish()
-
-        startActivity(intent)
+        this.finish()
     }
 }
