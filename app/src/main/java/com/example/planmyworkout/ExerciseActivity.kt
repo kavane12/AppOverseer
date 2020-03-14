@@ -35,6 +35,9 @@ class ExerciseActivity : AppCompatActivity() {
             skipbutton.setOnClickListener{
                 nextExerciseScreen(exercises,index)
             }
+            ratingbutton.setOnClickListener{
+                nextExerciseScreen(exercises, index)
+            }
         }
 
     }
