@@ -24,9 +24,11 @@ class NavActivity : AppCompatActivity() {
     val user = FirebaseAuth.getInstance().currentUser
     val db = Firebase.firestore
 
+    // Data we need for recommendation
     // todo Latitude and Longitude of Irvine for testing
     val LAT = 33
     val LONG = -118
+    private var temperature : Double = -273.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,7 @@ class NavActivity : AppCompatActivity() {
         }
 
         // Get the weather
-        Weather().execute()
+        val temperature = Weather().execute()
     }
 
     internal inner class Weather :AsyncTask<String?, Void?, String>() {
@@ -86,6 +88,7 @@ class NavActivity : AppCompatActivity() {
 
                 val weatherInfoText = ".\nWEATHER\nCurrently: ${weather.getString("main")}\nTemp max: ${main.getString("temp_max")}\nTemp min: ${main.getString("temp_min")}\nFeelsLike: ${main.getString("feels_like")}"
                 Log.i("WEATHER", weatherInfoText)
+                return main.getString("FeelsLike");
 
             } catch (e: JSONException) {
                 Log.w("API Fetch", "Failed to fetch valid weather data")

@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SeekBar.OnSeekBarChangeListener
 import com.example.planmyworkout.PlaylistActivity
 import com.example.planmyworkout.R
+import com.example.planmyworkout.RecommendActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.firestore.ktx.firestore
@@ -146,7 +147,7 @@ class PopActivity : Activity() {
         // Start button
         val customStartButton = findViewById<Button>(R.id.custom_start_button)
         customStartButton?.setOnClickListener {
-            switchToWorkoutActivity()
+            switchToRocommendActivity()
         }
     }
 
@@ -180,8 +181,8 @@ class PopActivity : Activity() {
         chipGroup.addView(chip)
     }
 
-    private fun switchToWorkoutActivity() {
-        val intent = Intent(this, PlaylistActivity::class.java)
+    private fun switchToRocommendActivity() {
+        val intent = Intent(this, RecommendActivity::class.java)
 
         startActivity(intent)
     }

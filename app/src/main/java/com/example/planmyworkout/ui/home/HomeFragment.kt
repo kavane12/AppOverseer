@@ -10,7 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.planmyworkout.PlaylistActivity
 import com.example.planmyworkout.R
+import com.example.planmyworkout.RecommendActivity
 
 
 class HomeFragment : Fragment() {
@@ -34,19 +36,17 @@ class HomeFragment : Fragment() {
         val customButton : Button = root.findViewById(R.id.custom_button)
 
         customButton?.setOnClickListener {
-            activity?.let { it1 ->
-
-                    val intent = Intent(it1, PopActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
-                    startActivity(intent)
-
-            }
+            val intent = Intent(activity, PopActivity::class.java)
+            startActivity(intent)
         }
-
-
-
-
 
         return root
     }
+
+    private fun switchToRocommendActivity() {
+        val intent = Intent(activity, RecommendActivity::class.java)
+        startActivity(intent)
+    }
+
+
 }
