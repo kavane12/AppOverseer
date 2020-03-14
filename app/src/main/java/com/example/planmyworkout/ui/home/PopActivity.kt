@@ -4,13 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SeekBar.OnSeekBarChangeListener
+import com.example.planmyworkout.PlaylistActivity
 import com.example.planmyworkout.R
-import com.example.planmyworkout.ui.Workout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.firestore.ktx.firestore
@@ -143,6 +142,12 @@ class PopActivity : Activity() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
             }
         })
+
+        // Start button
+        val customStartButton = findViewById<Button>(R.id.custom_start_button)
+        customStartButton?.setOnClickListener {
+            switchToWorkoutActivity()
+        }
     }
 
     private fun addChip(tag: String, musclesSet: MutableSet<String>, dropdownItems : MutableList<String>, popupMuscleSpinner : Spinner) {
@@ -176,7 +181,9 @@ class PopActivity : Activity() {
     }
 
     private fun switchToWorkoutActivity() {
-        val intent = Intent(this, Workout::class.java)
+        val intent = Intent(this, PlaylistActivity::class.java)
+
+        startActivity(intent)
     }
 
 
