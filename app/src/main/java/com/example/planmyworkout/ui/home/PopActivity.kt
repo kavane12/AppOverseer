@@ -147,7 +147,7 @@ class PopActivity : Activity() {
         // Start button
         val customStartButton = findViewById<Button>(R.id.custom_start_button)
         customStartButton?.setOnClickListener {
-            switchToRocommendActivity()
+            switchToRecommendActivity()
         }
     }
 
@@ -181,8 +181,10 @@ class PopActivity : Activity() {
         chipGroup.addView(chip)
     }
 
-    private fun switchToRocommendActivity() {
+    private fun switchToRecommendActivity() {
         val intent = Intent(this, RecommendActivity::class.java)
+
+        intent.putExtra("temperature", intent.extras?.getDouble("temperature"))
 
         startActivity(intent)
     }
