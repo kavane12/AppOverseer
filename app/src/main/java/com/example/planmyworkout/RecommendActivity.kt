@@ -9,7 +9,19 @@ class RecommendActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_fetch)
 
-        Log.i("DATA", intent.extras?.getDouble("temperature").toString())
+        // DATA INPUTS
+        // Temperature: -273.0 if not supplied
+        // Duration: 0 if not supplied
+        // Intensity: 0 if not supplied
+        // Selected Muscles: [] if not supplied
+        // Steptracker:
+        // Sleep:
+
+        Log.i("DATANOW", intent.extras?.getDouble("temperature").toString())
+        Log.i("DATANOW", intent.extras?.getInt("intensity").toString())
+        Log.i("DATANOW", intent.extras?.getInt("duration").toString())
+        Log.i("DATANOW", intent.extras?.getStringArray("selectedMuscles").toString())
+
 
     }
 }

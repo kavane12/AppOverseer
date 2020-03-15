@@ -26,7 +26,6 @@ class DataFetchActivity : Activity() {
 
         // WEATHER
         Weather().execute()
-
     }
 
 
