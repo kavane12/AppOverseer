@@ -1,14 +1,11 @@
-package com.example.planmyworkout.ui
+package com.example.planmyworkout
 
 import android.app.Activity
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import com.example.planmyworkout.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.auth.FirebaseAuth
