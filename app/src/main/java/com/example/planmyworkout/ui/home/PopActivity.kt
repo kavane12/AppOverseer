@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
@@ -23,6 +24,12 @@ class PopActivity : Activity() {
 
     // Run once for Spinner
     var check = false
+
+    // Input data
+    var selectedDuration = 60
+    var selectedIntensity = 5
+    var selectedAtGym = true
+    var selectedMuscles = mutableSetOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +53,14 @@ class PopActivity : Activity() {
         val intensityTextView : TextView = findViewById(R.id.custom_popup_intensity_text)
 
         durationSeekbar?.setOnSeekBarChangeListener(  object: OnSeekBarChangeListener {
-            var newValue = 0
             override fun onProgressChanged(
                 seekBar: SeekBar,
                 progress: Int,
                 fromUser: Boolean
+                fromUser: Boolean
             ) {
-                newValue = progress
-                durationTextView.setText("Duration: ~${(newValue+1)*10} minutes")
+                selectedDuration = (progress+1)*10
+                durationTextView.setText("Duration: ~$selectedDuration minutes")
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -66,14 +73,13 @@ class PopActivity : Activity() {
         })
 
         intensitySeekbar?.setOnSeekBarChangeListener(  object: OnSeekBarChangeListener {
-            var newValue = 0
             override fun onProgressChanged(
                 seekBar: SeekBar,
                 progress: Int,
                 fromUser: Boolean
             ) {
-                newValue = progress
-                intensityTextView.setText("Intensity: ${(newValue+1)}")
+                selectedIntensity = progress+1
+                intensityTextView.setText("Intensity: $selectedIntensity")
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -91,11 +97,9 @@ class PopActivity : Activity() {
         hasEquipmentSwitch?.setOnCheckedChangeListener( object: CompoundButton.OnCheckedChangeListener {
 
             override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                selectedAtGym = isChecked
             }
         })
-
-        // List of items that have been selected by user
-        var selectedMuscles = mutableSetOf<String>()
 
         // Muscle Group Spinner (dropdown)
         val muscleGroupSpinner = findViewById<Spinner>(R.id.custom_popup_spinner)
@@ -165,7 +169,7 @@ class PopActivity : Activity() {
             musclesSet.remove(tag)
             chipGroup.removeView(chip)
 
-            // Readd to dropdown menu
+            // Read to dropdown menu
             dropdownItems.removeAt(0)
             dropdownItems.add(tag)
             dropdownItems.sort()
@@ -184,11 +188,13 @@ class PopActivity : Activity() {
     private fun switchToRecommendActivity() {
         val intent = Intent(this, RecommendActivity::class.java)
 
+        Log.i("DATA", selectedDuration.toString())
+        Log.i("DATA", selectedIntensity.toString())
+        Log.i("DATA", selectedAtGym.toString())
+        Log.i("DATA", selectedMuscles.toString())
+
         intent.putExtra("temperature", intent.extras?.getDouble("temperature"))
 
         startActivity(intent)
     }
-
-
-
 }
