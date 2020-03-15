@@ -25,6 +25,9 @@ class PopActivity : Activity() {
     // Run once for Spinner
     var check = false
 
+    // Data from intent
+    var temperature = -273.0
+
     // Input data
     var selectedDuration = 60
     var selectedIntensity = 5
@@ -33,6 +36,11 @@ class PopActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val temp = intent.extras?.getDouble("temperature")
+        if (temp != null) {
+            temperature = temp
+        }
 
         setContentView(R.layout.activity_custom_popup)
 
@@ -187,12 +195,11 @@ class PopActivity : Activity() {
     private fun switchToRecommendActivity() {
         val intent = Intent(this, RecommendActivity::class.java)
 
-        Log.i("DATA", selectedDuration.toString())
-        Log.i("DATA", selectedIntensity.toString())
-        Log.i("DATA", selectedAtGym.toString())
-        Log.i("DATA", selectedMuscles.toString())
+        intent.putExtra("temperature", temperature)
+        intent.putExtra("duration", selectedDuration)
+        intent.putExtra("intensity", selectedIntensity)
+        intent.putExtra("selectedMuscles", selectedMuscles.toTypedArray())
 
-        intent.putExtra("temperature", intent.extras?.getDouble("temperature"))
 
         startActivity(intent)
     }
