@@ -57,7 +57,6 @@ class PopActivity : Activity() {
                 seekBar: SeekBar,
                 progress: Int,
                 fromUser: Boolean
-                fromUser: Boolean
             ) {
                 selectedDuration = (progress+1)*10
                 durationTextView.setText("Duration: ~$selectedDuration minutes")
