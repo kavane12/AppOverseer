@@ -19,8 +19,7 @@
             android:label="PopActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.PopupTheme"
-            tools:ignore="LockedOrientationActivity"
-        />
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".ExerciseActivity" />
         <activity android:name=".PlaylistActivity" />
         <activity
