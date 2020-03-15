@@ -6,5 +6,6 @@
 
     <string name="signout_button">Sign Out</string>
     <string name="play_button">Start this workout</string>
-    <string name="skip_button">Next exercise</string>
+    <string name="skip_button">Skip exercise</string>
+    <string name="rating_button">Rate and finish exercise</string>
 </resources>
