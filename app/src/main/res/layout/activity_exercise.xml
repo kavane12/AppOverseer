@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/exercise_description_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
@@ -33,15 +33,15 @@
 
     <TextView
         android:id="@+id/exercise_intensity_textView"
-        app:layout_constraintStart_toStartOf="@+id/exercise_description_textView"
-        app:layout_constraintTop_toBottomOf="@+id/exercise_description_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/exercise_description_textView"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_description_textView" />
 
     <TextView
         android:id="@+id/description_title_textView"
@@ -56,5 +56,24 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_intensity_textView" />
+
+    <Button
+        android:id="@+id/ratingbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/rating_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
