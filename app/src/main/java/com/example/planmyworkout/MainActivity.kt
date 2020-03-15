@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.firebase.ui.auth.AuthUI
@@ -58,10 +57,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -93,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         // If user is already logged in, go to home page, else prompt login
         if (user != null) {
-            switchToHomePage(user)
+            switchToDataFetch(user)
         } else {
             // Choose authentication providers
             val providers = arrayListOf(
@@ -134,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 // Add user to Firebase
                 db.collection("Users").document(info["email"].toString()).set(info)
 
-                switchToHomePage(user)
+                switchToDataFetch(user)
             } else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
@@ -145,12 +141,9 @@ class MainActivity : AppCompatActivity() {
 
     // FINALLY DONE FUNCTION
 
-    private fun switchToHomePage(user: FirebaseUser?) {
-        // Switch to home page and end current activity
-        val intent = Intent(this, NavActivity::class.java)
-
-        // Passes user variable to next activity
-        intent.putExtra(USER, user)
+    private fun switchToDataFetch(user: FirebaseUser?) {
+        // Switch to data fetch activity and end current activity
+        val intent = Intent(this, DataFetchActivity::class.java)
 
         // Prevents animation when switching to new event
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -159,6 +152,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
         // Stop current activity
-        this.finish()
+        finish()
     }
 }

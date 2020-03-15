@@ -21,9 +21,9 @@ class PlaylistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist)
         // val exercises: Array<String> = intent.getStringArrayExtra("exercise_list")
-        val exercises: Array<String> = arrayOf("Barbell Curl","Twisting Crunch","Dumbbell Kickback") //placeholder
+        val exercises: Array<String> = arrayOf("Barbell Curl", "Twisting Crunch", "Dumbbell Kickback") //placeholder
         val listView = findViewById<ListView>(R.id.playlist_listview)
-        listView.adapter = CustomAdapter(this,exercises)
+        listView.adapter = CustomAdapter(this, exercises)
         launchNextScreen(exercises)
     }
 
@@ -47,7 +47,7 @@ class PlaylistActivity : AppCompatActivity() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val layoutInflater = LayoutInflater.from(mContext)
-            val row = layoutInflater.inflate(R.layout.playlist_row,parent,false)
+            val row = layoutInflater.inflate(R.layout.playlist_row, parent, false)
 
             val exerciseNameTextView = row.findViewById<TextView>(R.id.exercise_name_textview)
             val exerciseDescriptionTextView = row.findViewById<TextView>(R.id.exercise_sublabel_textview)
@@ -57,7 +57,7 @@ class PlaylistActivity : AppCompatActivity() {
             val docRef = db.collection("Exercises").document(ex_list[position])
 
             docRef.get().addOnCompleteListener(OnCompleteListener {
-                if(it.isSuccessful) {
+                if (it.isSuccessful) {
                     val equip = it.result?.getBoolean("Equipment")
                     if (equip != null) {
                         if (equip) {
@@ -74,11 +74,11 @@ class PlaylistActivity : AppCompatActivity() {
 
     }
 
-    private fun launchNextScreen(exercises: Array<String>){
-        play_button.setOnClickListener{
-            val intent = Intent(this,ExerciseActivity::class.java)
-            intent.putExtra("exercise_list",exercises)
-            intent.putExtra("exercise_list_index",0)
+    private fun launchNextScreen(exercises: Array<String>) {
+        play_button.setOnClickListener {
+            val intent = Intent(this, ExerciseActivity::class.java)
+            intent.putExtra("exercise_list", exercises)
+            intent.putExtra("exercise_list_index", 0)
             startActivity(intent)
         }
     }
