@@ -18,6 +18,8 @@ class RecommendActivity : Activity() {
         // Sleep:
 
         Log.i("DATANOW", intent.extras?.getDouble("temperature").toString())
+        Log.i("DATANOW", intent.extras?.getLong("sleep").toString())
+        Log.i("DATANOW", intent.extras?.getLong("steps").toString())
         Log.i("DATANOW", intent.extras?.getInt("intensity").toString())
         Log.i("DATANOW", intent.extras?.getInt("duration").toString())
         Log.i("DATANOW", intent.extras?.getStringArray("selectedMuscles").toString())

@@ -26,7 +26,8 @@ class NavActivity : AppCompatActivity() {
 
         // Get relevant data
         val temperature = intent.getDoubleExtra("temperature", -273.0)
-
+        val sleep = intent.getLongExtra("sleep", -1)
+        val steps = intent.getLongExtra("steps", -1)
 
         // Set up bottom navigation bar
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -36,6 +37,8 @@ class NavActivity : AppCompatActivity() {
         val graph = navInflater.inflate(R.navigation.mobile_navigation)
 
         graph.addArgument("temperature", NavArgument.Builder().setDefaultValue(temperature).build())
+        graph.addArgument("sleep", NavArgument.Builder().setDefaultValue(sleep).build())
+        graph.addArgument("steps", NavArgument.Builder().setDefaultValue(steps).build())
 
         navController.graph = graph
 
@@ -54,6 +57,8 @@ class NavActivity : AppCompatActivity() {
             when(destination.id) {
                 R.id.navigation_home -> {
                     destination.addArgument("temperature", NavArgument.Builder().setDefaultValue(temperature).build())
+                    destination.addArgument("sleep", NavArgument.Builder().setDefaultValue(sleep).build())
+                    destination.addArgument("steps", NavArgument.Builder().setDefaultValue(steps).build())
                 }
             }
         }

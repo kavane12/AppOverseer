@@ -27,6 +27,8 @@ class PopActivity : Activity() {
 
     // Data from intent
     var temperature = -273.0
+    var sleep: Long = -1
+    var steps: Long = -1
 
     // Input data
     var selectedDuration = 60
@@ -40,6 +42,14 @@ class PopActivity : Activity() {
         val temp = intent.extras?.getDouble("temperature")
         if (temp != null) {
             temperature = temp
+        }
+        val slp = intent.extras?.getLong("sleep")
+        if (slp != null) {
+            sleep = slp
+        }
+        val stp = intent.extras?.getLong("steps")
+        if (stp != null) {
+            steps = stp
         }
 
         setContentView(R.layout.activity_custom_popup)
@@ -196,6 +206,8 @@ class PopActivity : Activity() {
         val intent = Intent(this, RecommendActivity::class.java)
 
         intent.putExtra("temperature", temperature)
+        intent.putExtra("sleep", sleep)
+        intent.putExtra("steps", steps)
         intent.putExtra("duration", selectedDuration)
         intent.putExtra("intensity", selectedIntensity)
         intent.putExtra("selectedMuscles", selectedMuscles.toTypedArray())
