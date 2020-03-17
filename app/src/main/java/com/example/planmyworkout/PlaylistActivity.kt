@@ -20,6 +20,13 @@ class PlaylistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist)
+
+        // For demo purposes, show the calculated intensity
+        val calculatedIntensity = intent.getDoubleExtra("calculatedIntensity", 5.0)
+        val intensityTextView = findViewById<TextView>(R.id.playlist_demo_intensity)
+        intensityTextView.text = "Calculated Final Intensity: ${calculatedIntensity}"
+
+
         val exercises: Array<String> = intent.getStringArrayExtra("exerciseList")
 //        val exercises: Array<String> = arrayOf("Barbell Curl", "Twisting Crunch", "Dumbbell Kickback") //placeholder
         val listView = findViewById<ListView>(R.id.playlist_listview)

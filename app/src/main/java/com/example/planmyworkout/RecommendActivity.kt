@@ -23,6 +23,7 @@ class RecommendActivity : Activity() {
     private var muscles : List<String> = ArrayList()
 
     private var listOfExercises = mutableSetOf<String>()
+    private var finalIntensity: Double = 5.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +118,7 @@ class RecommendActivity : Activity() {
         stepsWeight *= tempWeight
 
         // Combined weights
-        val finalIntensity = intensity * (0.4 * stepsWeight + 0.6 * sleepWeight)
+        finalIntensity = intensity * (0.4 * stepsWeight + 0.6 * sleepWeight)
 
         fetchRecommendedWorkouts(finalIntensity)
     }
@@ -154,6 +155,8 @@ class RecommendActivity : Activity() {
                     val intent = Intent(this, PlaylistActivity::class.java)
 
                     intent.putExtra("exerciseList", listOfExercises.toTypedArray())
+                    intent.putExtra("calculatedIntensity", finalIntensity)
+
                     startActivity(intent)
                     finish()
                 }
