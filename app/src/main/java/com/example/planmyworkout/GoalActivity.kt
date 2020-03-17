@@ -115,7 +115,7 @@ class GoalActivity : Activity() {
             musclesSet.remove(tag)
             chipGroup.removeView(chip)
 
-            // Readd to dropdown menu
+            // Read to dropdown menu
             dropdownItems.removeAt(0)
             dropdownItems.add(tag)
             dropdownItems.sort()

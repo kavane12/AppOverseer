@@ -20,8 +20,8 @@ class PlaylistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist)
-        // val exercises: Array<String> = intent.getStringArrayExtra("exercise_list")
-        val exercises: Array<String> = arrayOf("Barbell Curl", "Twisting Crunch", "Dumbbell Kickback") //placeholder
+        val exercises: Array<String> = intent.getStringArrayExtra("exerciseList")
+//        val exercises: Array<String> = arrayOf("Barbell Curl", "Twisting Crunch", "Dumbbell Kickback") //placeholder
         val listView = findViewById<ListView>(R.id.playlist_listview)
         listView.adapter = CustomAdapter(this, exercises)
         launchNextScreen(exercises)
