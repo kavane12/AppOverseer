@@ -53,14 +53,18 @@ class RecommendActivity : Activity() {
 
         // Set intensity, otherwise default to 5
         val intentIntensity = intent.extras?.getInt("intensity")
-        if (intentIntensity == null) {
+        if (intentIntensity == null || intentIntensity == 0) {
             intensity = 5
+        } else {
+            intensity = intentIntensity
         }
 
         // Set duration, otherwise default to 1 hr
         val intentDuration = intent.extras?.getInt("duration")
-        if (intentDuration == null) {
+        if (intentDuration == null || intentDuration == 0) {
             duration = 60
+        } else {
+            duration = intentDuration
         }
 
         // MUSCLES TO FOCUS ON
@@ -148,8 +152,10 @@ class RecommendActivity : Activity() {
                     Log.i("DOCS FINAL", listOfExercises.toString())
 
                     val intent = Intent(this, PlaylistActivity::class.java)
+
                     intent.putExtra("exerciseList", listOfExercises.toTypedArray())
                     startActivity(intent)
+                    finish()
                 }
             }
             .addOnFailureListener { error -> Log.i("Exercise fetch failed", error.toString())}

@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
         // Switches to given Activity with relevant data points
         val intent = Intent(activity, act)
 
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         intent.putExtra("temperature", arguments?.getDouble("temperature"))
         intent.putExtra("sleep", arguments?.getDouble("sleep"))
         intent.putExtra("steps", arguments?.getLong("steps"))

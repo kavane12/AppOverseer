@@ -205,6 +205,7 @@ class PopActivity : Activity() {
     private fun switchToRecommendActivity() {
         val intent = Intent(this, RecommendActivity::class.java)
 
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         intent.putExtra("temperature", temperature)
         intent.putExtra("sleep", sleep)
         intent.putExtra("steps", steps)
