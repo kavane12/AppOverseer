@@ -28,7 +28,7 @@ class DataFetchActivity : Activity() {
     private var LAT = 0
     private var LONG = 0
     private var TEMPERATURE: Double = -273.0
-    private var SLEEP_DURATION: Double = -1.0
+    private var SLEEP_DURATION: Number = -1.0
     private var STEPS_WALKED: Long = -1
 
     // Check if tasks are done
@@ -71,7 +71,7 @@ class DataFetchActivity : Activity() {
                     val logDate = (doc.get("date") as Timestamp).toDate()
 
                     if (daysBetween(logDate, currentDay) == 1) {
-                        SLEEP_DURATION = doc.get("hours") as Double
+                        SLEEP_DURATION = doc.get("hours") as Number
                     }
                 }
                 gotSleep = true
@@ -134,6 +134,9 @@ class DataFetchActivity : Activity() {
 
             // Switch to home page and end current activity
             val intent = Intent(this, NavActivity::class.java)
+
+            // For demo purposes, hardcoded temperature
+            TEMPERATURE = 22.0
 
             intent.putExtra("temperature", TEMPERATURE)
             intent.putExtra("sleep", SLEEP_DURATION)
