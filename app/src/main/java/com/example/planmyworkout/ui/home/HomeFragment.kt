@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         val intent = Intent(activity, act)
 
         intent.putExtra("temperature", arguments?.getDouble("temperature"))
-        intent.putExtra("sleep", arguments?.getLong("sleep"))
+        intent.putExtra("sleep", arguments?.getDouble("sleep"))
         intent.putExtra("steps", arguments?.getLong("steps"))
 
         startActivity(intent)

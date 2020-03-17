@@ -26,7 +26,7 @@ class NavActivity : AppCompatActivity() {
 
         // Get relevant data
         val temperature = intent.getDoubleExtra("temperature", -273.0)
-        val sleep = intent.getLongExtra("sleep", -1)
+        val sleep = intent.getDoubleExtra("sleep", -1.0)
         val steps = intent.getLongExtra("steps", -1)
 
         // Set up bottom navigation bar

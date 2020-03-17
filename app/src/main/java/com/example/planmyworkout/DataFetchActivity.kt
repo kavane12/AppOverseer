@@ -28,7 +28,7 @@ class DataFetchActivity : Activity() {
     private var LAT = 0
     private var LONG = 0
     private var TEMPERATURE: Double = -273.0
-    private var SLEEP_DURATION: Long = -1
+    private var SLEEP_DURATION: Double = -1.0
     private var STEPS_WALKED: Long = -1
 
     // Check if tasks are done
@@ -71,7 +71,7 @@ class DataFetchActivity : Activity() {
                     val logDate = (doc.get("date") as Timestamp).toDate()
 
                     if (daysBetween(logDate, currentDay) == 1) {
-                        SLEEP_DURATION = doc.get("hours") as Long
+                        SLEEP_DURATION = doc.get("hours") as Double
                     }
                 }
                 gotSleep = true

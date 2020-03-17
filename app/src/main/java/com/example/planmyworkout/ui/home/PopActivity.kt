@@ -27,7 +27,7 @@ class PopActivity : Activity() {
 
     // Data from intent
     var temperature = -273.0
-    var sleep: Long = -1
+    var sleep: Double = -1.0
     var steps: Long = -1
 
     // Input data
@@ -43,7 +43,7 @@ class PopActivity : Activity() {
         if (temp != null) {
             temperature = temp
         }
-        val slp = intent.extras?.getLong("sleep")
+        val slp = intent.extras?.getDouble("sleep")
         if (slp != null) {
             sleep = slp
         }
