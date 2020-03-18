@@ -2,6 +2,7 @@ package com.example.planmyworkout.ui.dashboard
 
 import android.content.Context
 import android.os.Bundle
+import android.os.health.TimerStat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planmyworkout.R
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.playlist_row.view.*
 import java.sql.Date
-import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DashboardFragment : Fragment() {
 
@@ -70,17 +73,47 @@ class DashboardFragment : Fragment() {
 
         override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
             //holder.itemView.exercise_name_textview.text = "HELP"
-            val date = sessions[position].getDate("date")?.time?.let { Date(it) }
-            holder.itemView.exercise_name_textview.text = date.toString()
-            val now = Date(Timestamp(System.currentTimeMillis()).time)
-            val daysago = now.compareTo(date)
-            holder.itemView.exercise_sublabel_textview.text = "${daysago-1} days ago"
+
+            val dateFormatter = SimpleDateFormat("MM/dd/YYYY - H:mm")
+
+            val now = Date()
+            val logDate = (sessions[position].get("date") as Timestamp).toDate()
+
+            holder.itemView.exercise_name_textview.text = dateFormatter.format(logDate)
+
+
+            val daysAgo = daysBetween(logDate, now)
+            holder.itemView.exercise_sublabel_textview.text = "${daysAgo-1} days ago"
+        }
+
+        private fun daysBetween(startDate: java.util.Date?, endDate: java.util.Date?): Int {
+            val sDate: Calendar = getDatePart(startDate)
+            val eDate: Calendar = getDatePart(endDate)
+
+            var daysBetween = 0
+            while (sDate.before(eDate)) {
+                sDate.add(Calendar.DAY_OF_MONTH, 1)
+                daysBetween++
+            }
+
+            return daysBetween
+        }
+
+        private fun getDatePart(date: java.util.Date?): Calendar {
+            val cal: Calendar = Calendar.getInstance()
+            cal.setTime(date)
+            cal[Calendar.HOUR_OF_DAY] = 0 // set hour to midnight
+            cal[Calendar.MINUTE] = 0 // set minute in hour
+            cal[Calendar.SECOND] = 0 // set second in minute
+            cal[Calendar.MILLISECOND] = 0 // set millis in second
+
+            val zeroedDate = cal.time // actually computes the new Date
+            return cal
+
         }
     }
 
     private class DashboardViewHolder(v: View): RecyclerView.ViewHolder(v){
 
     }
-
-
 }
